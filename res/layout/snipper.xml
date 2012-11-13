@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/snipperView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+	<LinearLayout 
+	    		android:id="@+id/linearLayout8"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/my_border" 
+		        android:orientation="vertical" 
+		        android:paddingTop="10dp">
+		        
+		    <LinearLayout
+		        android:id="@+id/linearLayout12"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="fill_horizontal"
+		        android:orientation="horizontal"
+		        android:paddingBottom="5dp"
+		        android:paddingTop="5dp" >
+
+		        <TextView
+		            android:id="@+id/textView1"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="Start Time: "
+		            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		        <Chronometer
+		            android:id="@+id/chronoStart"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="0.12"
+		            android:text="Chronometer" />
+
+		        <Button
+		            android:id="@+id/precision1"
+		            android:layout_width="wrap_content"
+		            android:layout_height="34dp"
+		            android:text="Precision" 
+		            android:onClick="precision"/>
+
+		    </LinearLayout>
+				
+		    <LinearLayout
+		        android:id="@+id/linearLayout1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="fill_horizontal"
+		        android:orientation="vertical" >
+		
+		        <SeekBar
+		            android:id="@+id/seeker"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content" />
+		    </LinearLayout>
+		
+		        <LinearLayout
+		            android:id="@+id/linearLayout3"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="fill_horizontal"
+		            android:orientation="horizontal"
+		            android:paddingBottom="5dp"
+		            android:paddingTop="5dp" >
+
+		            <TextView
+		                android:id="@+id/TextView01"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="End Time:   "
+		                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		            <Chronometer
+		                android:id="@+id/chronoEnd"
+		                android:layout_width="0dp"
+		                android:layout_height="33dp"
+		                android:layout_weight="0.18"
+		                android:text="Chronometer" />
+
+		            <Button
+		                android:id="@+id/precision2"
+		                android:layout_width="wrap_content"
+		                android:layout_height="34dp"
+		                android:text="Precision" 
+		                android:onClick="precision"/>
+
+		        </LinearLayout>
+		    
+		    <LinearLayout
+		        android:id="@+id/linearLayout2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="fill_horizontal"
+		        android:orientation="vertical" >
+		
+		        <SeekBar
+		            android:id="@+id/seeker2"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content" />
+		    </LinearLayout>
+
+			<LinearLayout
+			    android:id="@+id/linearLayout190"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="fill_horizontal"
+			    android:orientation="horizontal"
+			    android:paddingBottom="5dp"
+			    android:paddingTop="5dp" >
+
+			    <TextView
+			        android:id="@+id/textView1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="Current Time: "
+			        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    <Chronometer
+			        android:id="@+id/chronoCurrent"
+			        android:layout_width="0dp"
+			        android:layout_height="33dp"
+			        android:layout_weight="0.52"
+			        android:text="Chronometer" />
+			</LinearLayout>
+		
+		    <LinearLayout
+		        android:id="@+id/linearLayout1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="fill_horizontal"
+		        android:orientation="vertical" >
+		
+		        <SeekBar
+		            android:id="@+id/seeker3"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content" />
+		    </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout264"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"
+            android:text="File Path: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/file_Path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.95"
+            android:inputType="textMultiLine" 
+            android:clickable="false" 
+            android:longClickable="false"
+	        android:cursorVisible="false" 
+	        android:focusable="false" 
+	        android:focusableInTouchMode="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_weight=".5"
+            android:text="Save" 
+            android:onClick="save"/>
+        
+        <ImageButton
+            android:id="@+id/snipPlay"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="0.31"
+            android:onClick="playSound"
+            android:background="@null"
+            android:src="@drawable/play1" />
+        
+        <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:onClick="snip"
+        android:text="Browse" />
+
+    </LinearLayout>
+
+    <ScrollView android:id="@+id/ScrollView01"
+		     android:layout_width="wrap_content" 
+		     android:layout_height="fill_parent">
+
+	    <TextView
+	        android:id="@+id/textView2"
+	        android:text="@string/snip_instructions"
+	        android:paddingTop="20dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:clickable="false" 
+	        android:cursorVisible="false" 
+	        android:longClickable="false"
+	        android:focusable="false" 
+	        android:focusableInTouchMode="false"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	</ScrollView>
+	
+</LinearLayout>

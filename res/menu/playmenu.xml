@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/RecordP" android:title="@string/Record"
+        android:icon="@drawable/play1"></item>
+    <item android:id="@+id/EditM" android:titleCondensed="@string/editM"></item>
+    
+
+</menu>

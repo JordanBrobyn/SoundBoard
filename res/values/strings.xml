@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Audio Mashup</string>
+    
+    <string name="app_name_play">Play Time! (Audio Mashup)</string>
+    <string name="About">Audio Mashup is intended to interact with multiple
+        sound files to create your own beats or even just to use as a standard soundboard.\n\n
+        Snip MP3: Use this to create smaller clips of original sound files in your current possession.\n\n
+        Edit Mode: Here is where you can edit the playback options for each button.\n\n
+        Start: This is where the magic happens. Selecting the buttons will now play a song if preloaded.\n\n
+        Recorder: Record your voice or nearby sounds by using your phones mic. Recorded sounds are saved to /sdcard/Custom Soundclips\n\n
+        NOTE\n Moving between Start....Edit can be done through the menu options\n\n
+        Author: Jordan Brobyn\n
+	    Contact Info: jordanbrobyn@hotmail.com\n\n
+	    
+	    Please feel free to provide feedback or suggestions to the email above!
+    </string>
+
+    
+    <string name="snip_instructions">Instructions:\n 
+        1. Select a mp3 file using \'Browse\'\n
+        2. Select a start time and end time to cut from\n
+        3. (optional) sample the song using the play button\n
+        4. Press \'Save\' to add a new mp3 to \'\\sdcard\\Custom SoundClips\\
+   </string>
+    <string name="app_name_edit">Change Sounds (Custom SoundBoard)</string>
+    <string name="app_name_snip">Snip A Song (Custom SoundBoard)</string>
+    
+    <string name="start">Start</string>
+    <string name="edit">Edit Board</string>
+     <string name="snipper">Snip MP3</string>
+    <string name="settings">Settings</string>
+    <string name="exit">Exit</string>
+    <string name="save">Save</string>
+    <string name="Record">Record</string>
+    <string name="load">Load</string>
+    <string name="startM">Start</string>
+    <string name="editM">Edit</string>
+   
+	<string name="Button1">Button1</string>
+	<string name="Button2">Button2</string>
+	<string name="Button3">Button3</string>
+	<string name="Button4">Button4</string>
+	<string name="Button5">Button5</string>
+	<string name="Button6">Button6</string>
+	<string name="Button7">Button7</string>
+	<string name="Button8">Button8</string>
+	<string name="Button9">Button9</string>
+	<string name="Button10">Button10</string>
+	<string name="Button11">Button11</string>
+	<string name="Button12">Button12</string>
+	<string name="Button13">Button13</string>
+	<string name="Button14">Button14</string>
+	<string name="Button15">Button15</string>
+	<string name="Button16">Button16</string>
+	<string name="Button17">Button17</string>
+	<string name="Button18">Button18</string>
+	<string name="Button19">Button19</string>
+	<string name="Button20">Button20</string>
+	<string name="Button21">Button21</string>
+	<string name="Button22">Button22</string>
+	<string name="Button23">Button23</string>
+	<string name="Button24">Button24</string>
+	<string name="Button25">Button25</string>
+	<string name="Button26">Button26</string>
+	<string name="Button27">Button27</string>
+	<string name="Button28">Button28</string>
+	<string name="Button29">Button29</string>
+	<string name="Button30">Button30</string>
+	<string name="Button31">Button31</string>
+	<string name="Button32">Button32</string>
+	<string name="Button33">Button33</string>
+	<string name="Button34">Button34</string>
+	<string name="Button35">Button35</string>
+	<string name="Button36">Button36</string>
+	<string name="Button37">Button37</string>
+	<string name="Button38">Button38</string>
+	<string name="Button39">Button39</string>
+	                               
+</resources>

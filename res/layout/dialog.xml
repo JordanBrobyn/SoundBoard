@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:orientation="vertical"
+       android:id="@+id/aboutMain"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent">
+                
+     <LinearLayout
+         android:id="@+id/ButtonDesc"
+         android:layout_width="fill_parent"
+         android:layout_height="match_parent"
+         android:orientation="vertical"
+         android:paddingTop="10dp" >
+
+         
+         <LinearLayout
+             android:id="@+id/Description"
+             android:layout_width="fill_parent"
+             android:layout_height="200dp"
+             android:orientation="horizontal"
+             android:paddingTop="5dp" 
+             android:background = "@drawable/my_border">
+             
+             <ScrollView android:id="@+id/ScrollView01"
+		     android:layout_width="wrap_content" 
+		     android:paddingTop="10dp"
+		     android:paddingBottom="10dp"
+		     android:layout_height="200dp">
+		     
+			     <TextView
+			         android:id="@+id/TextView01"
+			         android:layout_width="wrap_content"
+			         android:layout_height="wrap_content"
+			         android:text="@string/About" />
+		     
+		     </ScrollView>
+             
+          </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/green"
+             android:layout_width="fill_parent"
+             android:layout_height="50dp"
+             android:orientation="horizontal"
+             android:paddingTop="10dp" >
+
+             <ImageView
+                 android:id="@+id/aboutGreen"
+                 android:layout_width="25dp"
+                 android:layout_height="25dp"
+                 android:src="@drawable/green"/>
+
+             <TextView
+                 android:id="@+id/textView1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text=" - No clip available"
+                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/blue"
+             android:layout_width="fill_parent"
+             android:layout_height="50dp"
+             android:orientation="horizontal"
+             android:paddingTop="10dp" >
+
+             <ImageView
+                 android:id="@+id/aboutBlue"
+                 android:layout_width="25dp"
+                 android:layout_height="25dp"
+                 android:src="@drawable/blue3" />
+
+             <TextView
+                 android:id="@+id/textView2"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text=" - Clip is paused"
+                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/red"
+             android:layout_width="fill_parent"
+             android:layout_height="50dp"
+             android:orientation="horizontal"
+             android:paddingTop="10dp" >
+
+             <ImageView
+                 android:id="@+id/aboutRed"
+                 android:layout_width="25dp"
+                 android:layout_height="25dp"
+                 android:src="@drawable/red1"
+                 android:tag="@string/Button1" />
+
+             <TextView
+                 android:id="@+id/textView3"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text=" - Clip is playing"
+                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+         </LinearLayout>
+
+         <RelativeLayout
+             android:id="@+id/red"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:paddingTop="10dp" >
+
+			 <Button
+			     android:id="@+id/Button01"
+			     android:layout_width="100dp"
+			     android:layout_height="wrap_content"
+			     android:layout_centerHorizontal="true"
+			     android:layout_centerVertical="true"
+			     android:paddingTop="10dp"
+			     android:text="Close"
+			     android:textStyle="bold|italic" />
+             
+         </RelativeLayout>
+     </LinearLayout>
+     
+   </LinearLayout>
+  

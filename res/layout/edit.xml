@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@android:id/tabhost"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent">
+   <LinearLayout
+       android:orientation="vertical"
+       android:id="@+id/editWindow"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent">
+       <TabWidget
+           android:id="@android:id/tabs"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content" />
+       <FrameLayout
+           android:id="@android:id/tabcontent"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent">
+           <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/tabview1">
+
+            	  <LinearLayout
+            	      android:layout_width="fill_parent"
+            	      android:layout_height="0dip"
+            	      android:layout_weight="1"
+            	      android:orientation="horizontal" >
+
+            	      <ImageView
+            	          android:id="@+id/ImageView01"
+            	          android:tag="@string/Button1"
+            	          android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+		            	  android:layout_height="77dp"
+            	          android:src="@drawable/green" 
+            	          android:onClick="editSound"/>
+
+            	      <ImageView
+            	          android:id="@+id/ImageView02"
+            	          android:tag="@string/Button2"
+            	          android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+            	          android:layout_height="77dp"
+            	          android:src="@drawable/green" 
+            	          android:onClick="editSound"/>
+
+
+            	      <ImageView
+            	          android:id="@+id/imageView03"
+            	          android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+            	          android:tag="@string/Button3"
+            	          android:layout_height="77dp"
+            	          android:src="@drawable/green" 
+            	          android:onClick="editSound"
+            	          android:longClickable="true"/>
+
+            	  </LinearLayout>
+
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView04"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:tag="@string/Button4"
+	                       android:layout_height="77dp"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView05"
+	                       android:tag="@string/Button5"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView06"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:tag="@string/Button6"
+	                       android:layout_height="77dp"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView07"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button7"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView08"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button8"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView09"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button9"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView10"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button10"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView11"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:src="@drawable/green"
+	                       android:tag="@string/Button11" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView12"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:src="@drawable/green"
+	                       android:tag="@string/Button12" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView13"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button13"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView14"
+	                      android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button14"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	                   <ImageView
+	                       android:id="@+id/ImageView15"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button15"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+	             
+                
+           </LinearLayout>
+           
+           <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/tabview2">
+          	 <LinearLayout
+            	      android:layout_width="fill_parent"
+            	      android:layout_height="0dip"
+            	      android:layout_weight="1"
+            	      android:orientation="horizontal" >
+
+            	      <ImageView
+            	          android:id="@+id/ImageView16"
+            	          android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+            	          android:layout_height="77dp"
+            	          android:tag="@string/Button16"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+            	      <ImageView
+            	          android:id="@+id/ImageView17"
+            	          android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+            	          android:layout_height="77dp"
+            	          android:tag="@string/Button17"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+
+            	      <ImageView
+            	          android:id="@+id/imageView18"
+            	          android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+            	          android:layout_height="77dp"
+            	          android:tag="@string/Button18"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+            	  </LinearLayout>
+
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView19"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button19"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView20"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button20"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView21"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button21"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView22"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button22"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView23"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button23"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView24"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button24"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView25"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button25"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView26"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button26"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView27"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button27"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+	               <LinearLayout
+            	    android:orientation="horizontal"
+            	    android:layout_weight="1"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="0dip">
+
+	                   <ImageView
+	                       android:id="@+id/ImageView28"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button28"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView29"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button29"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+
+	                   <ImageView
+	                       android:id="@+id/ImageView30"
+	                       android:layout_width="0dp"
+		            	  android:layout_weight="0.30"
+	                       android:layout_height="77dp"
+	                       android:tag="@string/Button30"
+	                       android:src="@drawable/green" 
+	                       android:onClick="editSound"/>
+
+	             </LinearLayout>
+                 
+               
+           </LinearLayout>
+       </FrameLayout>
+   </LinearLayout>
+</TabHost>

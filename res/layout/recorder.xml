@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/my_border_darker" 
+    android:id="@+id/recorderView">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recording Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/recordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VoiceRecording1" />
+
+    <RelativeLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_border"
+        android:orientation="vertical" >
+
+        <Chronometer
+            android:id="@+id/chronoTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Chronometer"
+            android:textSize="50dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/chronoTime" />
+
+        <ImageView
+            android:id="@+id/player2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/chronoTime"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/chronoTime"
+            android:src="@drawable/play1" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/recorder2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:src="@drawable/record2"/>
+
+</TableLayout>

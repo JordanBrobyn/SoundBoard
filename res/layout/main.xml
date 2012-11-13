@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ns="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/relativeMain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/background"
+         >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/title" />
+
+        <ImageView
+            android:id="@+id/Start"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:src="@drawable/start0" />
+
+        <ImageView
+            android:id="@+id/Edit"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:src="@drawable/edit0" />
+
+        <ImageView
+            android:id="@+id/Snipper"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:src="@drawable/snip0" />
+
+        <ImageView
+            android:id="@+id/recorder"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:src="@drawable/recorder0"/>
+
+        <ImageView
+            android:id="@+id/About"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:src="@drawable/about0" />
+
+        
+
+    </TableLayout>
