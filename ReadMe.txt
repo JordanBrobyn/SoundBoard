@@ -7,7 +7,8 @@ is only able to mix WAV and MP3 Files.
 Some sub functions include voice recording and audio clipping. Currently the audio clipping is also restricted to MP3 files only.
 
 Libraries required include:
-bugsense-trace-1-1-2
+bugsense-trace-1-1-2,
+
 jl1.0.1 (Jlayer - MP3 decoder)
 
 These can be found online with a simple google search.
