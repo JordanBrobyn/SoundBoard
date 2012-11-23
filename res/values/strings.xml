@@ -19,10 +19,10 @@
 
     
     <string name="snip_instructions">Instructions:\n 
-        1. Select a mp3 file using \'Browse\'\n
+        1. Select a mp3 or wav file using \'Browse\'\n
         2. Select a start time and end time to cut from\n
         3. (optional) sample the song using the play button\n
-        4. Press \'Save\' to add a new mp3 to \'\\sdcard\\Custom SoundClips\\
+        4. Press \'Save\' to add a new clip to \'\\Custom SoundClips\\
    </string>
     <string name="app_name_edit">Change Sounds (Custom SoundBoard)</string>
     <string name="app_name_snip">Snip A Song (Custom SoundBoard)</string>

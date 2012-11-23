@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/my_border_darker" >
-    
+    
     <RelativeLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
@@ -13,34 +13,18 @@
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/recorderFileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/playerImage"
             android:layout_toRightOf="@+id/textView2"
+            android:text="AudioMix01"
+            android:singleLine="true"
             android:ems="10" >
 
             <requestFocus />
         </EditText>
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editText1"
-            android:layout_alignBottom="@+id/editText1"
-            android:layout_alignParentLeft="true"
-            android:text="File Name : "
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <Button
-            android:id="@+id/replaySave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText1"
-            android:layout_centerHorizontal="true"
-            android:text="Save" />
 
         <ImageView
             android:id="@+id/playerImage"
@@ -50,6 +34,23 @@
             android:layout_alignParentTop="true"
             android:src="@drawable/play1" />
 
+        <Button
+            android:id="@+id/replaySave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/playerImage"
+            android:layout_centerHorizontal="true"
+            android:text="Save" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/recorderFileName"
+            android:layout_alignBottom="@+id/recorderFileName"
+            android:layout_alignParentLeft="true"
+            android:text="File Name : "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>
 
 </TableLayout>

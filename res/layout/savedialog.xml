@@ -46,7 +46,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="26dp"
-            android:text="*Leaving the field blank will create 'test.mp3'"
+            android:text="*Leaving the field blank will create 'test.*'"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <Button

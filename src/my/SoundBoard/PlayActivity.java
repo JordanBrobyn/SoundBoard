@@ -9,9 +9,11 @@ package my.SoundBoard;
  */
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +33,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
@@ -43,6 +46,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -69,9 +73,11 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 	Dialog dialog;
 	int loop = 0;
 	int volume = 50;
-	CheckBox looper;
-	CheckBox repeater;
 	SeekBar mSeekBar;
+	
+	boolean pauser = false;
+	boolean looper = false;
+	boolean repeater = false;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +97,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
         mSeekBar.setProgress(50);
         parent = findViewById(R.id.tabview1).getRootView();
         parent.setOnTouchListener(this);
-        
-        
-        looper = (CheckBox) findViewById(R.id.looper);
-        repeater = (CheckBox) findViewById(R.id.repeater);
+
         
         soundDB.open(); //Open db to grab data
         populateBoard(); //Display board with active keys and populate hashmap with ids and mediaplayers
@@ -325,7 +328,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		cursor.moveToFirst(); // Point to the head of the db list	
 		
 		while(!cursor.isAfterLast()){ //Log Table to verify
-			SoundInfo info = new SoundInfo(cursor.getString(0),cursor.getString(1),0,0,R.drawable.blue3,R.drawable.red1);
+			SoundInfo info = new SoundInfo(cursor.getString(0),cursor.getString(1),0,0,R.drawable.orange3,R.drawable.red1);
 			hash.put(cursor.getString(0), info);
 					
 			ImageView iView = (ImageView) view.findViewWithTag(cursor.getString(0)); //Change icon to signify a song is available
@@ -348,12 +351,24 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 			
 			if(mp.isPlaying()){
 				/*With multi touch one action is pressed in rapid succession
-				 * 
+				 * Since the tabs are layered, multiple buttons are being selected
+				 * The timer will prevent the buttons behind to get activated
 				 */
 				if(System.currentTimeMillis() - index.getTime() < 100)
 					return;
 				
-				if(looper.isChecked()){
+				if(pauser){
+					if(recording == true){
+						long currTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - startTime;
+						ClipEvent evnt = new ClipEvent(index.id,EventType.STOP,currTime,index.song,volume,0,mp.getCurrentPosition());
+						eventLogs.add(evnt);
+					}
+					mp.pause();
+					hash.get(v.getTag()).setTime(System.currentTimeMillis());
+					hash.get(v.getTag()).setPaused(true);
+					
+				}
+				else if(looper){
 					
 					//Log the event occuring for a loop event
 					if(recording == true){
@@ -371,7 +386,6 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 					//Log events for a stop
 					if(recording == true){
 						long currTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - startTime;
-						Log.v("MP CHECK"," "+mp.getCurrentPosition());
 						ClipEvent evnt = new ClipEvent(index.id,EventType.STOP,currTime,index.song,volume,0,mp.getCurrentPosition());
 						eventLogs.add(evnt);
 					}
@@ -384,22 +398,31 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 				}
 			}else{
 				try {
-					//Screen overlap will hit the button mutliple times this will prevent activation
+					//Screen overlap will hit the button mutliple times, this will prevent activation
 					if(System.currentTimeMillis() - index.getTime() < 100) 
 						return;
+					
+					//The song was previously paused. Continue from last position
+					if(index.isPaused()){
+						mp.start();
+						if(recording == true){
+							long currTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - startTime;
+							ClipEvent evnt = new ClipEvent(index.id,EventType.PLAY,currTime,index.song,volume,mp.getCurrentPosition(),0);
+							eventLogs.add(evnt);
+						}
+						hash.get(v.getTag()).setTime(System.currentTimeMillis());
+						hash.get(v.getTag()).setPaused(false);
+						return;
+					}
 					//Log.v("Song name is","Name = "+index.song.);
 					if(index.song.charAt(0) == 'd'){ //Determine if the song is an asset from drumset
-						AssetFileDescriptor afd = getApplicationContext().getAssets().openFd(index.song);
-						mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+
+							AssetFileDescriptor afd = getApplicationContext().getAssets().openFd(index.song);
+							mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 					}else{
 						mp.setDataSource(index.song);
 					}
 					mp.setOnCompletionListener(this);
-					
-					if(repeater.isChecked())
-						mp.setLooping(true);
-					else
-						mp.setLooping(false);
 					
 					//Log events for a stop
 					if(recording == true){
@@ -414,6 +437,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 					mp.start();
 					mp.setVolume(((float)volume)/100, ((float)volume)/100);
 					hash.get(v.getTag()).setTime(System.currentTimeMillis());
+					hash.get(v.getTag()).setRepeat(repeater);
 					
 				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block
@@ -470,6 +494,47 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		mSeekBar.setProgress(volume);
 		
 	}
+	
+	public void alterOptions(View v){
+		
+		if(v.getId() == R.id.restart_button){
+			if(repeater == false){
+				ImageView iView = (ImageView) v;
+				iView.setImageResource(R.drawable.repeat_restart_on);
+				iView.invalidate();
+				repeater = true;
+			}else{
+				ImageView iView = (ImageView) v;
+				iView.setImageResource(R.drawable.repeat_restart);
+				iView.invalidate();
+				repeater = false;
+			}
+		}else if(v.getId() == R.id.continuous_button){
+			if(looper == false){
+				ImageView iView = (ImageView) v;
+				iView.setImageResource(R.drawable.repeat_on);
+				iView.invalidate();
+				looper = true;
+			}else{
+				ImageView iView = (ImageView) v;
+				iView.setImageResource(R.drawable.repeat);
+				iView.invalidate();
+				looper = false;
+			}
+		}else if(v.getId() == R.id.pause_button){
+			if(pauser == false){
+				ImageView iView = (ImageView) v;
+				iView.setImageResource(R.drawable.pause_on);
+				iView.invalidate();
+				pauser = true;
+			}else{
+				ImageView iView = (ImageView) v;
+				iView.setImageResource(R.drawable.pause_off);
+				iView.invalidate();
+				pauser = false;
+			}
+		}
+	}
 
 	public void onCompletion(MediaPlayer finished) {
 		Collection<SoundInfo> c = hash.values();
@@ -489,10 +554,22 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 					ClipEvent evnt = new ClipEvent(info.id,EventType.STOP,currTime,info.song,volume,0,mp.getDuration());
 					eventLogs.add(evnt);
 				}
-        	   icon = (ImageView)view.findViewWithTag(info.id);
-        	   finished.stop();
-        	   finished.reset();
-        	   icon.setImageResource(info.pause); //Notify user that the song stopped by changing the appearance
+				
+				if(info.repeat){
+					//mp.seekTo(0);
+					mp.start();
+					if(recording == true){
+						long currTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - startTime;
+						ClipEvent evnt = new ClipEvent(info.id,EventType.PLAY,currTime,info.song,volume,0,0);
+						eventLogs.add(evnt);
+					}
+					
+				}else{
+	        	   icon = (ImageView)view.findViewWithTag(info.id);
+	        	   finished.stop();
+	        	   finished.reset();
+	        	   icon.setImageResource(info.pause); //Notify user that the song stopped by changing the appearance
+				}
            }
         }
 		
@@ -514,6 +591,10 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		EditText text = (EditText) dialog.findViewById(R.id.recorderFileName);
+		String fileName = text.getText().toString();
+		
+		Log.v("FileName",""+fileName);
 		dialog.dismiss();
 		Log.v("Dismissing","Dismissed event");
 		Intent intent = new Intent(this,FileBuilderService.class);
@@ -521,7 +602,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		Bundle data = new Bundle();
 		data.putSerializable("DATA", eventLogs);
 		intent.putExtra("DURATION", (endTime - startTime));
-		intent.putExtra("FILENAME","test.wav");
+		intent.putExtra("FILENAME",fileName+".wav");
 		intent.putExtra("MESSENGER", messenger);
 		intent.putExtra("DATA", data);
 		startService(intent);

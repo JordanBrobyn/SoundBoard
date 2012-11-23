@@ -10,13 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +28,9 @@ import android.widget.Toast;
 
 public class sdBrowser extends ListActivity{
 
-	private List<String> item = null;
+	private ArrayList<String> item = null;
 	private List<String> path = null;
-	private String root="/sdcard";
+	private String root=Environment.getExternalStorageDirectory().getPath();
 	private TextView myPath;
 	private String buttonId = null;
 	
@@ -58,14 +62,15 @@ public class sdBrowser extends ListActivity{
     	
     	File f = new File(dirPath);
     	File[] files = f.listFiles();
-    	
+ 
+
     	if(!dirPath.equals(root))
     	{
 
-    		item.add(root);
+    		item.add("HOME");
     		path.add(root);
     		
-    		item.add("../");
+    		item.add("");
     		path.add(f.getParent());
             
     	}
@@ -74,16 +79,20 @@ public class sdBrowser extends ListActivity{
     	{
     			File file = files[i];
     			path.add(file.getPath());
-    			if(file.isDirectory())
+    			if(file.isDirectory()){
     				item.add(file.getName() + "/");
-    			else
+    			}
+    			else{
     				item.add(file.getName());
+    			}
     	}
 
-    	ArrayAdapter<String> fileList =
-    		new ArrayAdapter<String>(this, R.layout.row, item);
+    	LibraryAdapter fileList = new LibraryAdapter(this,R.layout.row,item);
+    	
     	setListAdapter(fileList);
+    	
     }
+    
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -118,4 +127,47 @@ public class sdBrowser extends ListActivity{
 		}
 	}
 	
+	/*Customized view for the sd browser to efficiently change icons with respect to file types
+	 * 
+	 */
+	private class LibraryAdapter extends ArrayAdapter<String>
+	{
+		private ArrayList<String> items;
+		
+		public LibraryAdapter(Context context, int textViewResourceId, ArrayList<String> items) {
+            super(context, textViewResourceId, items);
+            this.items = items;
+		}
+		
+		@Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+                View v = convertView;
+                if (v == null) {
+                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v = vi.inflate(R.layout.row, null);
+                }
+                String o = items.get(position);
+                if (o != null) {
+                        TextView text = (TextView) v.findViewById(R.id.rowtext);
+                        ImageView image = (ImageView) v.findViewById(R.id.icon);
+                        if (text != null) {
+                              text.setText(o);                            
+                              if(o.contains("/")){
+                            	  image.setImageResource(R.drawable.folder);
+                              }else if(o.contains(".mp3") || o.contains(".wav") || o.contains(".ogg")){
+                            	  image.setImageResource(R.drawable.music);
+                              }else if(o.equals("")){
+                            	  image.setImageResource(R.drawable.up);  
+                              }else if(o.equals("HOME")){
+                            	  image.setImageResource(R.drawable.home);
+                              }else{
+                            	  image.setImageResource(R.drawable.document);
+                              }
+                        }
+                        
+                }
+                return v;
+        }
+		
+	}
 }

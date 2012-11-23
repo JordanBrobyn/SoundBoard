@@ -53,7 +53,7 @@ public class EditActivity extends TabActivity{
 			String id = data.getStringExtra("id"); // Keep track of button pressed
 			View view = findViewById(R.id.editWindow);
 			ImageView iView = (ImageView) view.findViewWithTag(id);
-			iView.setImageResource(R.drawable.blue3);
+			iView.setImageResource(R.drawable.orange3);
 			iView.invalidate();
 			editPreferences(file,id);
 		}
@@ -69,7 +69,7 @@ public class EditActivity extends TabActivity{
 		while(!cursor.isAfterLast()){ //Log Table to verify 
 			
 			ImageView iView = (ImageView) view.findViewWithTag(cursor.getString(0));
-			iView.setImageResource(R.drawable.blue3);
+			iView.setImageResource(R.drawable.orange3);
 			iView.invalidate();
 			cursor.moveToNext();
 		}

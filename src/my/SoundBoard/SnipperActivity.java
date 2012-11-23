@@ -77,6 +77,10 @@ public class SnipperActivity extends Activity implements SeekBar.OnSeekBarChange
 
 	}
 	
+	/*
+	 * Creates a dialog to start or end at a
+	 * very specific point in a song
+	 */
 	public void precision(View v){
 		final int selection;
 		int value = 0;
@@ -144,10 +148,32 @@ public class SnipperActivity extends Activity implements SeekBar.OnSeekBarChange
                 dialog.cancel(); 
             }
         });
-        dialog.show();	
+        dialog.show();
+        EditText minutes = (EditText)dialog.findViewById(R.id.minutes);
+		EditText seconds = (EditText)dialog.findViewById(R.id.seconds);
+		EditText milliseconds = (EditText)dialog.findViewById(R.id.milliseconds);
+		
+		if(selection == 1){
+			Integer sec = (start_position/1000)%60;
+			Integer min = (start_position/1000)/60;
+			Integer milli = start_position - (min*60*1000) - (sec*1000);
+			minutes.setText(min.toString());
+			seconds.setText(sec.toString());
+			milliseconds.setText(milli.toString());
+			
+		}else{
+			Integer sec = (end_position/1000)%60;
+			Integer min = (end_position/1000)/60;
+			Integer milli = end_position - (min*60*1000) - (sec*1000);
+			minutes.setText(min.toString());
+			seconds.setText(sec.toString());
+			milliseconds.setText(milli.toString());
+		}
+        
 	}
 	
-	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
+	//Change the viewable start or end time via the progress bar
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) { 
         if(seekBar.getId() == mSeekBar.getId()){
         	start_position = progress;
         }else if (seekBar.getId() == mSeekBar2.getId()){
@@ -155,9 +181,9 @@ public class SnipperActivity extends Activity implements SeekBar.OnSeekBarChange
         }
     }
 
-	
+	// Return selected data from file browser
 	@Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data) // Return selected data from file browser
+    public void onActivityResult(int requestCode,int resultCode,Intent data) 
     {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(data != null){
@@ -263,8 +289,8 @@ public class SnipperActivity extends Activity implements SeekBar.OnSeekBarChange
 		@Override
 		protected String doInBackground(String... params) {
 			String result = null;
-			mp3Writter writter = new mp3Writter();
-			value = writter.save(filePath, start_Time, end_Time, song_Duration,save_Name);
+			SnipWritter writter = new SnipWritter();
+			value = writter.save(filePath, start_position, end_position, song_Duration,save_Name);
 			return null;
 		}
 
@@ -335,7 +361,7 @@ public class SnipperActivity extends Activity implements SeekBar.OnSeekBarChange
 			});
             try {
             	currentPosition = mp.getCurrentPosition();
-                Thread.sleep(500); 
+                Thread.sleep(24); 
             } catch (InterruptedException e) {
                 return;
             } catch (Exception e) {

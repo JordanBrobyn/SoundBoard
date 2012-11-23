@@ -38,7 +38,7 @@
           </LinearLayout>
 
          <LinearLayout
-             android:id="@+id/green"
+             android:id="@+id/inactive"
              android:layout_width="fill_parent"
              android:layout_height="50dp"
              android:orientation="horizontal"
@@ -48,7 +48,7 @@
                  android:id="@+id/aboutGreen"
                  android:layout_width="25dp"
                  android:layout_height="25dp"
-                 android:src="@drawable/green"/>
+                 android:src="@drawable/inactive"/>
 
              <TextView
                  android:id="@+id/textView1"
@@ -70,7 +70,7 @@
                  android:id="@+id/aboutBlue"
                  android:layout_width="25dp"
                  android:layout_height="25dp"
-                 android:src="@drawable/blue3" />
+                 android:src="@drawable/orange3" />
 
              <TextView
                  android:id="@+id/textView2"

@@ -17,6 +17,7 @@ TO-DO:
 
 Improve interface (currently looks somewhat sloppy)
 Improve music search function
+AutoGenerate playboards instead of using the xml layout
 
 Bug: MP3 splitter seems to be clipping a few milliseconds when using very precise clipping criteria. ex 2m:01s:950ms
 Bug: Some users claim to be unable to find clipped files in their Custom Soundclip folders

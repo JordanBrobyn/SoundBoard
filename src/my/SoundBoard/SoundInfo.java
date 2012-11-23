@@ -23,6 +23,8 @@ public class SoundInfo {
 	MediaPlayer mp;
 	long time;
 	boolean just_ON;
+	boolean repeat = false;
+	boolean paused = false;
 	
 	public SoundInfo(String _id, String _song, int _status, int _playType,int _pause,int _play) {
 		id = _id;
@@ -34,12 +36,28 @@ public class SoundInfo {
 		play = _play;
 	}
 	
+	public void setRepeat(boolean _repeat){
+		repeat = _repeat;
+	}
+	
+	public boolean getRepeat(){
+		return repeat;
+	}
+	
 	public void setTime(long _time){
 		time = _time;
 	}
 	
 	public long getTime(){
 		return time;
+	}
+	
+	public void setPaused(boolean pause){
+		paused = pause;
+	}
+	
+	public boolean isPaused(){
+		return paused;
 	}
 	
 	public void setOn(){

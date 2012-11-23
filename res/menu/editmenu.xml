@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/load" android:titleCondensed="@string/load">Save</item>
-    <item android:id="@+id/save" android:titleCondensed="@string/save">Load</item>
-    <item android:id="@+id/start" android:titleCondensed="@string/startM"></item>
+    <item android:id="@+id/load" 
+        android:titleCondensed="@string/load">Save</item>
+    <item android:id="@+id/save" 
+        android:titleCondensed="@string/save">Load</item>
+    <item android:id="@+id/start" 
+        android:icon="@drawable/key_play_pause"
+        android:titleCondensed="@string/startM"></item>
     
 
 </menu>
