@@ -29,6 +29,8 @@ import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.util.Log;
@@ -591,6 +593,28 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		SharedPreferences remaining = getSharedPreferences("Attempts", 0);
+		Editor editor = remaining.edit();
+
+		if(remaining.contains("Count")){
+			int counter = remaining.getInt("Count",0);
+			
+			if(counter <= 0){
+				Toast.makeText(this, "Recording Limit(10) Reached.", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Purchase the full version to keep Mixing!", Toast.LENGTH_LONG).show();
+				dialog.dismiss();
+				return;
+			}else{
+				System.out.println("Decrementing counter, Counter is currently at "+counter);
+				editor.putInt("Count", counter-1);
+				editor.commit();
+			}
+		}else{
+			System.out.println("Does not contain count");
+			editor.putInt("Count", 10);
+			editor.commit();
+		}
+		
 		EditText text = (EditText) dialog.findViewById(R.id.recorderFileName);
 		String fileName = text.getText().toString();
 		
