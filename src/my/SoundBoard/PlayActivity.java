@@ -3,17 +3,15 @@ package my.SoundBoard;
  * Author:Jordan Brobyn
  * Description: Used to play sounds predefined by the user
  * Multiple boards and options like loop and repeat allow for variations of playback
- * 
+ * Drumkit is currently commented out due to issues with reading from compressed memory
  * 
  * Complete: Start working on the application service for filebuilder etc.
  */
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -30,10 +28,8 @@ import android.app.Dialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.Menu;
@@ -45,7 +41,6 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -88,7 +83,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
        
         tabs.addTab(tabs.newTabSpec("tab1").setIndicator("Board 1").setContent(R.id.tabview1)); //Create tab view
         tabs.addTab(tabs.newTabSpec("tab2").setIndicator("Board 2").setContent(R.id.tabview2));
-        tabs.addTab(tabs.newTabSpec("tab3").setIndicator("Drum Kit").setContent(R.id.tabview3));
+        //tabs.addTab(tabs.newTabSpec("tab3").setIndicator("Drum Kit").setContent(R.id.tabview3));
         tabs.setCurrentTab(0);
        
         mSeekBar = (SeekBar) findViewById(R.id.volumeBar);
@@ -115,7 +110,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 	public boolean onOptionsItemSelected(MenuItem item) {//Option Menu Selections
 		
 		if (item.getItemId() == R.id.RecordP){
-			Toast.makeText(this, "Not Available in Trial Version", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Start Mixing!", Toast.LENGTH_SHORT).show();
 			
 			
 			if(recording == false){
@@ -320,9 +315,9 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		Cursor cursor = soundDB.retrieveDB();
 		hash = new HashMap<String,SoundInfo>();
 		View view = findViewById(R.id.playWindow);
-		prepareDrums pD = new prepareDrums();
+		//prepareDrums pD = new prepareDrums();
 		
-		hash = pD.prepareDrums(hash,getApplicationContext());//Add DrumKit
+		//hash = pD.prepareDrums(hash,getApplicationContext());//Add DrumKit
 		
 		
 		cursor.moveToFirst(); // Point to the head of the db list	
@@ -414,14 +409,14 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 						hash.get(v.getTag()).setPaused(false);
 						return;
 					}
-					//Log.v("Song name is","Name = "+index.song.);
-					if(index.song.charAt(0) == 'd'){ //Determine if the song is an asset from drumset
+					
+					/*if(index.song.charAt(0) == 'd'){ //Determine if the song is an asset from drumset
 
 							AssetFileDescriptor afd = getApplicationContext().getAssets().openFd(index.song);
 							mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-					}else{
+					}else{*/
 						mp.setDataSource(index.song);
-					}
+					//}
 					mp.setOnCompletionListener(this);
 					
 					//Log events for a stop
@@ -497,43 +492,48 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 	
 	public void alterOptions(View v){
 		
-		if(v.getId() == R.id.restart_button){
-			if(repeater == false){
-				ImageView iView = (ImageView) v;
-				iView.setImageResource(R.drawable.repeat_restart_on);
-				iView.invalidate();
-				repeater = true;
-			}else{
-				ImageView iView = (ImageView) v;
-				iView.setImageResource(R.drawable.repeat_restart);
-				iView.invalidate();
-				repeater = false;
-			}
-		}else if(v.getId() == R.id.continuous_button){
-			if(looper == false){
-				ImageView iView = (ImageView) v;
-				iView.setImageResource(R.drawable.repeat_on);
-				iView.invalidate();
-				looper = true;
-			}else{
-				ImageView iView = (ImageView) v;
-				iView.setImageResource(R.drawable.repeat);
-				iView.invalidate();
-				looper = false;
-			}
-		}else if(v.getId() == R.id.pause_button){
-			if(pauser == false){
-				ImageView iView = (ImageView) v;
-				iView.setImageResource(R.drawable.pause_on);
-				iView.invalidate();
-				pauser = true;
-			}else{
-				ImageView iView = (ImageView) v;
-				iView.setImageResource(R.drawable.pause_off);
-				iView.invalidate();
-				pauser = false;
-			}
+		switch (v.getId()){
+			case R.id.restart_button: 
+				if(repeater == false){
+					ImageView iView = (ImageView) v;
+					iView.setImageResource(R.drawable.repeat_restart_on);
+					iView.invalidate();
+					repeater = true;
+				}else{
+					ImageView iView = (ImageView) v;
+					iView.setImageResource(R.drawable.repeat_restart);
+					iView.invalidate();
+					repeater = false;
+				}
+				break;
+			case R.id.continuous_button:
+				if(looper == false){
+					ImageView iView = (ImageView) v;
+					iView.setImageResource(R.drawable.repeat_on);
+					iView.invalidate();
+					looper = true;
+				}else{
+					ImageView iView = (ImageView) v;
+					iView.setImageResource(R.drawable.repeat);
+					iView.invalidate();
+					looper = false;
+				}
+				break;
+			case R.id.pause_button:
+				if(pauser == false){
+					ImageView iView = (ImageView) v;
+					iView.setImageResource(R.drawable.pause_on);
+					iView.invalidate();
+					pauser = true;
+				}else{
+					ImageView iView = (ImageView) v;
+					iView.setImageResource(R.drawable.pause_off);
+					iView.invalidate();
+					pauser = false;
+				}
+				break;
 		}
+		
 	}
 
 	public void onCompletion(MediaPlayer finished) {
@@ -593,6 +593,17 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		// TODO Auto-generated method stub
 		EditText text = (EditText) dialog.findViewById(R.id.recorderFileName);
 		String fileName = text.getText().toString();
+		
+		if(eventLogs.size() <= 0){
+			Toast.makeText(this, "ERROR: No songs were selected to mix!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		for(ClipEvent event: eventLogs){
+			if(!(event.fileLocation.endsWith(".mp3") || event.fileLocation.endsWith(".wav"))){
+				Toast.makeText(this, "OOPS! Recordings can only save MP3 or WAV files", Toast.LENGTH_LONG).show();
+				return;
+			}
+		}
 		
 		Log.v("FileName",""+fileName);
 		dialog.dismiss();

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +31,7 @@ import android.widget.Toast;
 public class EditActivity extends TabActivity{
 
 	SoundDataSource soundDB;
+	Vibrator vib;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,7 @@ public class EditActivity extends TabActivity{
         tabs.setCurrentTab(0);
         soundDB = new SoundDataSource(getApplicationContext());
 		soundDB.open();
-		
+		vib = (Vibrator) getSystemService(getApplicationContext().VIBRATOR_SERVICE);
 		prepareTable();
 		//soundDB.deleteAll();
 	}
@@ -97,17 +100,30 @@ public class EditActivity extends TabActivity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.save){
-			Toast.makeText(this, "Not Available in Trial Version", Toast.LENGTH_SHORT).show();
-		}
-		else if (item.getItemId() == R.id.load){
-			Toast.makeText(this, "Not Available in Trial Version", Toast.LENGTH_SHORT).show();
-		}else if(item.getItemId() == R.id.start){
+
+		if(item.getItemId() == R.id.start){
 			Toast.makeText(this, "Play Board", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(getApplicationContext(),PlayActivity.class);
 			soundDB.close();
 			finish();
 			startActivity(intent);
+		}else if(item.getItemId() == R.id.snipSong){
+			Intent intent = new Intent(getApplicationContext(), SnipperActivity.class);
+			vib.vibrate(30);
+			startActivity(intent);
+		}else if(item.getItemId() == R.id.recordV){
+			final Dialog dialog = new Dialog(this);
+			dialog.setContentView(R.layout.recorder);
+			dialog.setTitle("Recorder");
+			dialog.setCancelable(true);
+			dialog.show();
+			Recorder newRecorder = new Recorder();
+			View view = dialog.findViewById(R.id.recorderView);
+			
+			 
+			// Vibrate for 300 milliseconds
+			vib.vibrate(30);
+			newRecorder.tonCreate(view,vib);//Call the recorder functions
 		}
 		
 		return true;

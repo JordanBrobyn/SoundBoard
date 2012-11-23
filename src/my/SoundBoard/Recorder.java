@@ -59,8 +59,8 @@ public class Recorder implements Runnable, OnCompletionListener, OnTouchListener
 		ImageView view = (ImageView)v ;
 		if(recording == 0){
 			start.setBase(SystemClock.elapsedRealtime());
-
-			RAR.setOutputFile("/sdcard/Custom SoundClips/"+filename+".wav");
+			Toast.makeText(active.getContext(), "Now Recording!", Toast.LENGTH_SHORT).show();
+			RAR.setOutputFile(Environment.getExternalStorageDirectory().getPath()+"/Custom SoundClips/"+filename+".wav");
 			RAR.prepare();
 			RAR.start();
 			recording = 1;

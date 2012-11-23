@@ -93,7 +93,7 @@ public class SoundBoardActivity extends Activity implements OnTouchListener{
 	public void about(View v){//Information about the application
 		final Dialog dialog = new Dialog(SoundBoardActivity.this);
         dialog.setContentView(R.layout.dialog);
-        dialog.setTitle("About Custom SoundBoard");
+        dialog.setTitle("About Audio Mashup");
         dialog.setCancelable(true);
         Button button = (Button) dialog.findViewById(R.id.Button01);
         button.setOnClickListener(new OnClickListener() {
