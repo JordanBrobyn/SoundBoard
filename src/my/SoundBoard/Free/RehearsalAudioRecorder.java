@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 
 import java.io.File;
 import java.io.IOException;
@@ -114,7 +114,7 @@ public class RehearsalAudioRecorder
 			}
 			catch (IOException e)
 			{
-				Log.e(RehearsalAudioRecorder.class.getName(), "Error occured in updateListener, recording is aborted");
+				//Log.e(RehearsalAudioRecorder.class.getName(), "Error occured in updateListener, recording is aborted");
 				stop();
 			}
 		}

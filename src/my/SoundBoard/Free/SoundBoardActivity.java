@@ -1,13 +1,18 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*Date: 04/03/2012
  * Author:Jordan Brobyn
  * Description: Main Activity display to orient the user
  */
+import java.io.File;
+
+import my.SoundBoard.Free.R;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -54,12 +59,9 @@ public class SoundBoardActivity extends Activity implements OnTouchListener{
 	        record = (ImageView) findViewById(R.id.recorder);
 	        record.setOnTouchListener(this);
 	        vib = (Vibrator) getSystemService(getApplicationContext().VIBRATOR_SERVICE);
-	      // AdView adView = (AdView)findViewById(R.id.adView1);
-
-	       // AdRequest adRequest = new AdRequest();
-	       // adRequest.setTesting(true);
 	        
-	       // adView.loadAd(adRequest);
+	        File createBase = new File(Environment.getExternalStorageDirectory().getPath()+"/Custom SoundClips/");
+	        createBase.mkdir();
 
 	}
 	

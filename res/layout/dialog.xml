@@ -60,7 +60,7 @@
          </LinearLayout>
 
          <LinearLayout
-             android:id="@+id/blue"
+             android:id="@+id/orange"
              android:layout_width="fill_parent"
              android:layout_height="50dp"
              android:orientation="horizontal"
@@ -76,7 +76,7 @@
                  android:id="@+id/textView2"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text=" - Clip is paused"
+                 android:text=" - Clip is stopped"
                  android:textAppearance="?android:attr/textAppearanceMedium" />
 
          </LinearLayout>
@@ -92,7 +92,7 @@
                  android:id="@+id/aboutRed"
                  android:layout_width="25dp"
                  android:layout_height="25dp"
-                 android:src="@drawable/red1"
+                 android:src="@drawable/green"
                  android:tag="@string/Button1" />
 
              <TextView
@@ -103,7 +103,29 @@
                  android:textAppearance="?android:attr/textAppearanceMedium" />
 
          </LinearLayout>
-
+
+          <LinearLayout
+             android:id="@+id/blue"
+             android:layout_width="fill_parent"
+             android:layout_height="50dp"
+             android:orientation="horizontal"
+             android:paddingTop="10dp" >
+
+             <ImageView
+                 android:id="@+id/aboutBlue"
+                 android:layout_width="25dp"
+                 android:layout_height="25dp"
+                 android:src="@drawable/blue"
+                 android:tag="@string/Button1" />
+
+             <TextView
+                 android:id="@+id/textView3"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text=" - Clip is paused"
+                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+         </LinearLayout>
          <RelativeLayout
              android:id="@+id/red"
              android:layout_width="fill_parent"

@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 
 /*Date: 04/03/2012
  * Author:Jordan Brobyn
@@ -8,6 +8,8 @@ package my.SoundBoard;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import my.SoundBoard.Free.R;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;

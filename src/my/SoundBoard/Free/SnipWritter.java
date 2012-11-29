@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*Date: 04/03/2012
  * Author:Jordan Brobyn
  * Description: Uses the snipping created by the user to save this portion of the mp3 to a new file

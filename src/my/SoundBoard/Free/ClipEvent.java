@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 
 import java.io.Serializable;
 

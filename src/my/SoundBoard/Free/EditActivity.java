@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*Date: 04/03/2012
  * Author:Jordan Brobyn
  * Description: Activity used to give the user access to editing the soundboard
@@ -7,6 +7,8 @@ package my.SoundBoard;
  */
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+
+import my.SoundBoard.Free.R;
 
 import android.app.Activity;
 import android.app.Dialog;

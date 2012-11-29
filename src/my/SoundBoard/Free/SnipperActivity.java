@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 
 /*Date: 04/03/2012
  * Author:Jordan Brobyn
@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+
+import my.SoundBoard.Free.R;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -73,7 +75,6 @@ public class SnipperActivity extends Activity implements SeekBar.OnSeekBarChange
         filePath = null;
         start_Time = 0;
         song_Duration = 0;
-        
 
 	}
 	

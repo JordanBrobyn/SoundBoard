@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Audio Mashup</string>
+    <string name="app_name">Audio Mashup Lite</string>
     
     <string name="app_name_play">Play Time! (Audio Mashup)</string>
     <string name="About">Audio Mashup is intended to interact with multiple
         sound files to create your own beats or even just to use as a standard soundboard.\n\n
-        Snip MP3: Use this to create smaller clips of original sound files in your current possession.\n\n
-        Edit Mode: Here is where you can edit the playback options for each button.\n\n
-        Start: This is where the magic happens. Selecting the buttons will now play a song if preloaded.\n\n
+        Snipper: Use this to create smaller clips of original sound files in your current possession. Currently supports WAV and MP3.\n\n
+        Edit Mode: Here is where you can edit the playback options for each button. Through the menu, you can navigate to any other options.\n\n
+        Start: This is where the magic happens. Selecting the buttons will now play a song if preloaded. Hit \"Record\" in the menu to start recording your tracks.\n
+        \n\n
         Recorder: Record your voice or nearby sounds by using your phones mic. Recorded sounds are saved to /sdcard/Custom Soundclips\n\n
         NOTE\n Moving between Start....Edit can be done through the menu options\n\n
+        All Audio Mashup files generated will be saved to Custom SoundClips.\n\n
         Author: Jordan Brobyn\n
 	    Contact Info: jordanbrobyn@hotmail.com\n\n
 	    
-	    Please feel free to provide feedback or suggestions to the email above!
+	    Please feel free to provide feedback/issues or suggestions to the email above!
     </string>
 
     

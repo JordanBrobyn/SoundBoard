@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*
  * Remember to create a layout for SDK lower than 11.
  */
@@ -18,6 +18,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import my.SoundBoard.Free.R;
 
 import javazoom.jl.decoder.Bitstream;
 import javazoom.jl.decoder.BitstreamException;
@@ -53,7 +55,7 @@ public class FileBuilderService extends IntentService {
 	long currentBytesWritten = 0;
 	
 	static int bytesPerMillisecond = (2 * 44100 * 16 / 8)/1000;
-	int BYTESIZE = 4194304;
+	static int BYTESIZE = 4194304;
 	int BUFFSIZE = BYTESIZE/2; //4MB should be good enough for the standard buffer
 	long BUFFSIZEMS = BUFFSIZE/bytesPerMillisecond;
 	static int HEADERSIZE = 44;
@@ -68,10 +70,6 @@ public class FileBuilderService extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		mgr = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-		
-		
-		Log.v("Version",""+Build.VERSION.SDK_INT);
-		
 		
 		result = Activity.RESULT_OK;
 		
@@ -163,6 +161,8 @@ public class FileBuilderService extends IntentService {
 	                				break;
 	                		}
 	                	}
+	                	if(endEventIndex >= eventLogs.size())
+	                		endEventIndex = eventLogs.size()-1;
 	                	
 	                	//Get important information before getting data from primary and secondary file
 	                	mainFileTime = eventLogs.get(startEventIndex).time;
@@ -203,7 +203,7 @@ public class FileBuilderService extends IntentService {
 			try{
 				messenger.send(msg);
 			}catch(android.os.RemoteException e1){
-				Log.v("Message Event","Error sending message");
+				e1.printStackTrace();
 			}
 		}
 		
@@ -446,7 +446,10 @@ public class FileBuilderService extends IntentService {
 		Bitstream stream = new Bitstream(mp3Stream);
 		
 		int frame = 0;
+		System.out.println("Getting mp3 frame count and sampleRate = "+mp3.getSampleRate());
+		
 		frameCount = mp3.getNumFrames();
+		System.out.println("Frame count = "+frameCount);
 		//Begin getting PCM data from mp3 frames
 		//The goal is to only collect frames we need to be added to eachother
 		
@@ -552,12 +555,12 @@ public class FileBuilderService extends IntentService {
 	        writeInt(out, bytesPerMillisecond*duration);
 	        
 	        int bytesLeft = bytesPerMillisecond*duration;
-	        byte[] bytes = new byte[4194304];
-	        int writeAmount = 4194304;
+	        byte[] bytes = new byte[BYTESIZE];
+	        int writeAmount = BYTESIZE;
 	        
 	        while(bytesLeft != 0){
 	        	
-	        	if(bytesLeft < 4194304){
+	        	if(bytesLeft < BYTESIZE){
 	        		writeAmount = bytesLeft;
 	        		bytes = new byte[writeAmount];
 	        	}

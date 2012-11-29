@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*
  * Note: Start working on playing the songs in the time they are required to be played.
  * Finish getting pause working in Play.
@@ -11,7 +11,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import my.SoundBoard.ClipEvent.EventType;
+import my.SoundBoard.Free.R;
+import my.SoundBoard.Free.ClipEvent.EventType;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -77,7 +78,6 @@ public class ReplayTracks implements Runnable, OnCompletionListener, OnTouchList
 
 	public void run() {
 
-		Log.v("Thread","Running");
 		long startTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
 		int index = 0;
 		int secondCheck = 0;
@@ -104,7 +104,7 @@ public class ReplayTracks implements Runnable, OnCompletionListener, OnTouchList
 					performAction(clipEvnts.get(index));
 				}
 				catch (IOException e){
-					Log.v("Error","Could not perform action");
+					e.printStackTrace();
 				}
 				secondCheck = index + 1;
 				index++;
@@ -117,7 +117,7 @@ public class ReplayTracks implements Runnable, OnCompletionListener, OnTouchList
 							performAction(clipEvnts.get(secondCheck));
 						}
 						catch (IOException e){
-							Log.v("Error","Could not perform action");
+							e.printStackTrace();
 						}
 						secondCheck++;
 					}else{
@@ -129,7 +129,6 @@ public class ReplayTracks implements Runnable, OnCompletionListener, OnTouchList
 			}
 			
 			if (index >= clipEvnts.size() || currentTime - startTime >= time){
-				Log.v("Thread","Finished Thread");
 				break;
 			}
 					
@@ -138,7 +137,6 @@ public class ReplayTracks implements Runnable, OnCompletionListener, OnTouchList
 		stopAll(false);
 		
 		playing = false;
-		Log.v("Thread","Stopped");
 	}
 	
 	public void performAction(ClipEvent event) throws IOException{
@@ -146,9 +144,7 @@ public class ReplayTracks implements Runnable, OnCompletionListener, OnTouchList
 		SoundInfo info = hash.get(event.buttonName);
 		MediaPlayer mp = info.returnMp();
 		
-		Log.v("Thread","About to perform action "+event.type +"on "+event.buttonName);
 		switch(event.type){
-		
 			case PLAY:
 				mp.setDataSource(info.song);
 				mp.setOnCompletionListener(this);
@@ -164,17 +160,6 @@ public class ReplayTracks implements Runnable, OnCompletionListener, OnTouchList
 		}
 		
 	}
-
-	/*public void onClick(View arg0) {
-		// TODO Auto-generated method stub
-		Log.v("CLick Event","Button Clicked");
-		
-		if(arg0.getId() == R.id.replaySave){
-			playing = false;
-			dialog.dismiss();
-		}
-		
-	}*/
 	
 	//Stops all playing audio associated with the hashmap.
 	public void stopAll(boolean leaving){

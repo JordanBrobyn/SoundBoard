@@ -1,5 +1,7 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 import java.io.IOException;
+
+import my.SoundBoard.Free.R;
 
 import android.media.AudioFormat;
 import android.media.MediaPlayer;

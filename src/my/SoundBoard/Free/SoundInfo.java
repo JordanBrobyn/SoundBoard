@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*Date: 04/03/2012
  * Author:Jordan Brobyn
  * Description: Individual sound set up.
@@ -16,6 +16,7 @@ public class SoundInfo {
 	int status;
 	int pause; // Icons for pause and play
 	int play; // Icons for pause and play
+	int idle; //Icons for pause and play
 	int playType;
 	int start;
 	int stop;
@@ -26,7 +27,7 @@ public class SoundInfo {
 	boolean repeat = false;
 	boolean paused = false;
 	
-	public SoundInfo(String _id, String _song, int _status, int _playType,int _pause,int _play) {
+	public SoundInfo(String _id, String _song, int _status, int _playType,int _pause,int _play, int _idle) {
 		id = _id;
 		song = _song;
 		status = _status;
@@ -34,6 +35,7 @@ public class SoundInfo {
 		mp = new MediaPlayer();
 		pause = _pause;
 		play = _play;
+		idle = _idle;
 	}
 	
 	public void setRepeat(boolean _repeat){

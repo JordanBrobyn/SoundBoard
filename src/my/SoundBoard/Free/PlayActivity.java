@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*Date: 04/03/2012
  * Author:Jordan Brobyn
  * Description: Used to play sounds predefined by the user
@@ -7,7 +7,10 @@ package my.SoundBoard;
  * 
  * Complete: Start working on the application service for filebuilder etc.
  */
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,7 +18,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import my.SoundBoard.ClipEvent.EventType;
+import javazoom.jl.decoder.Bitstream;
+import javazoom.jl.decoder.BitstreamException;
+import javazoom.jl.decoder.Header;
+
+import my.SoundBoard.Free.R;
+import my.SoundBoard.Free.ClipEvent.EventType;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -112,11 +120,11 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 	public boolean onOptionsItemSelected(MenuItem item) {//Option Menu Selections
 		
 		if (item.getItemId() == R.id.RecordP){
-			Toast.makeText(this, "Start Mixing!", Toast.LENGTH_SHORT).show();
+			
 			
 			
 			if(recording == false){
-				
+				Toast.makeText(this, "Start Mixing!", Toast.LENGTH_SHORT).show();
 				eventLogs = new ArrayList<ClipEvent>();
 				stopAll(false);
 				recording = true;
@@ -124,7 +132,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 			
 			}
 			else{
-
+				Toast.makeText(this, "Recording Stopped!", Toast.LENGTH_SHORT).show();
 				stopAll(false);
 				recording = false;
 				endTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
@@ -185,7 +193,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 				}
         	    
         	    ImageView v = (ImageView)view.findViewWithTag(info.id);
-        	    v.setImageResource(info.pause);
+        	    v.setImageResource(info.idle);
         	    v.invalidate();
         	    mp.stop();   
            }
@@ -209,7 +217,6 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 					long starting = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
 					dealEvent(ptrIndex,event,v,actionResolved);
 					long ending = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-					Log.v("Time taken to perform touch",""+(ending-starting));
 					//Log.v("tag","move"+ptrIndex+" "+v.toString());
 					//Log.v("event.getPointerCount","="+event.getPointerCount());
 				}
@@ -325,11 +332,11 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		cursor.moveToFirst(); // Point to the head of the db list	
 		
 		while(!cursor.isAfterLast()){ //Log Table to verify
-			SoundInfo info = new SoundInfo(cursor.getString(0),cursor.getString(1),0,0,R.drawable.orange3,R.drawable.red1);
+			SoundInfo info = new SoundInfo(cursor.getString(0),cursor.getString(1),0,0,R.drawable.blue,R.drawable.green,R.drawable.orange3);
 			hash.put(cursor.getString(0), info);
 					
 			ImageView iView = (ImageView) view.findViewWithTag(cursor.getString(0)); //Change icon to signify a song is available
-			iView.setImageResource(info.pause);
+			iView.setImageResource(info.idle);
 			iView.setOnTouchListener(this);
 			iView.invalidate();
 			cursor.moveToNext();
@@ -360,7 +367,9 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 						ClipEvent evnt = new ClipEvent(index.id,EventType.STOP,currTime,index.song,volume,0,mp.getCurrentPosition());
 						eventLogs.add(evnt);
 					}
+					
 					mp.pause();
+					v.setImageResource(index.pause);
 					hash.get(v.getTag()).setTime(System.currentTimeMillis());
 					hash.get(v.getTag()).setPaused(true);
 					
@@ -388,7 +397,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 					}
 					
 					mp.stop();
-					v.setImageResource(index.pause);
+					v.setImageResource(index.idle);
 					v.invalidate();
 					mp.reset();
 					hash.get(v.getTag()).setTime(System.currentTimeMillis());
@@ -407,11 +416,17 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 							ClipEvent evnt = new ClipEvent(index.id,EventType.PLAY,currTime,index.song,volume,mp.getCurrentPosition(),0);
 							eventLogs.add(evnt);
 						}
+						v.setImageResource(index.play);
 						hash.get(v.getTag()).setTime(System.currentTimeMillis());
 						hash.get(v.getTag()).setPaused(false);
 						return;
 					}
 					
+					
+					/*
+					 * Currently this section is commented out due to the current inability
+					 * to read PCM data from compressed WAV files.
+					 */
 					/*if(index.song.charAt(0) == 'd'){ //Determine if the song is an asset from drumset
 
 							AssetFileDescriptor afd = getApplicationContext().getAssets().openFd(index.song);
@@ -441,6 +456,9 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
+					Toast.makeText(this, "Issues with this file!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, "Please edit this button and ensure the file exists", Toast.LENGTH_SHORT).show();
+					v.setImageResource(index.idle);
 					e.printStackTrace();
 				}
 			}
@@ -471,7 +489,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		         sb.append(";" );
 		   }
 		   sb.append("]" );
-		   Log.d(TAG, sb.toString());
+		   //Log.d(TAG, sb.toString());
 		}
 
 	
@@ -545,6 +563,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 	    SoundInfo info;
         View view = findViewById(R.id.playWindow);
         ImageView icon;
+        finished.seekTo(0);
 	    while(it.hasNext()){  //Remove mediaplayer data to release memory. This is not always done automatically
            info = (SoundInfo) it.next();
            mp = info.returnMp();
@@ -559,7 +578,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 				
 				if(info.repeat){
 					//mp.seekTo(0);
-					mp.start();
+					//mp.start();
 					if(recording == true){
 						long currTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - startTime;
 						ClipEvent evnt = new ClipEvent(info.id,EventType.PLAY,currTime,info.song,volume,0,0);
@@ -570,7 +589,7 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 	        	   icon = (ImageView)view.findViewWithTag(info.id);
 	        	   finished.stop();
 	        	   finished.reset();
-	        	   icon.setImageResource(info.pause); //Notify user that the song stopped by changing the appearance
+	        	   icon.setImageResource(info.idle); //Notify user that the song stopped by changing the appearance
 				}
            }
         }
@@ -579,9 +598,9 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 	
 	public void handleMessage(Message message){
 		if(message.arg1 == RESULT_OK){
-			Log.v("Handle Message","Message recieved ok");
+			//Log.v("Handle Message","Message recieved ok");
 		}else{
-			Log.v("Message Results", "Save canceled");
+			//Log.v("Message Results", "Save canceled");
 		}
 	
 	}
@@ -591,30 +610,13 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 		
 	}
 
+	/*
+	 * Save the recording to a file
+	 * Checks for appropriate file types and mixable data.
+	 */
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		SharedPreferences remaining = getSharedPreferences("Attempts", 0);
-		Editor editor = remaining.edit();
 
-		if(remaining.contains("Count")){
-			int counter = remaining.getInt("Count",0);
-			
-			if(counter <= 0){
-				Toast.makeText(this, "Recording Limit(10) Reached.", Toast.LENGTH_LONG).show();
-				Toast.makeText(this, "Purchase the full version to keep Mixing!", Toast.LENGTH_LONG).show();
-				dialog.dismiss();
-				return;
-			}else{
-				System.out.println("Decrementing counter, Counter is currently at "+counter);
-				editor.putInt("Count", counter-1);
-				editor.commit();
-			}
-		}else{
-			System.out.println("Does not contain count");
-			editor.putInt("Count", 10);
-			editor.commit();
-		}
-		
 		EditText text = (EditText) dialog.findViewById(R.id.recorderFileName);
 		String fileName = text.getText().toString();
 		
@@ -622,16 +624,55 @@ public class PlayActivity extends TabActivity implements OnTouchListener, SeekBa
 			Toast.makeText(this, "ERROR: No songs were selected to mix!", Toast.LENGTH_LONG).show();
 			return;
 		}
+		
+		int sampleRate = 44100;
+		int channels = 2;
+		
+		CheapMP3 mp3 = new CheapMP3();
+		CheapWAV wav = new CheapWAV();
+		
+		//Free version can only mix WAV Files, while full version can mix mp3 as well.
 		for(ClipEvent event: eventLogs){
-			if(!(event.fileLocation.endsWith(".mp3") || event.fileLocation.endsWith(".wav"))){
-				Toast.makeText(this, "OOPS! Recordings can only save MP3 or WAV files", Toast.LENGTH_LONG).show();
+			if(!event.fileLocation.endsWith(".wav")){
+				Toast.makeText(this, "OOPS! \n Audio Mashup (Free) can only mix WAV files", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Support the developer.\n Buy the Full Version to mix mp3 files!", Toast.LENGTH_LONG).show();
 				return;
+			}
+			//Make sure the sample rate and channels are supported
+			try{
+				if(event.fileLocation.endsWith(".wav")){
+					wav = new CheapWAV();
+					wav.ReadFile(new File(event.fileLocation));
+					if(wav.getSampleRate() != sampleRate && wav.getChannels() != channels){
+						
+						Toast.makeText(this, "The 'SampleRate' or 'Channel' is not Supported", Toast.LENGTH_LONG).show();
+						Toast.makeText(this, "SampleRate = 44100, Channel = 2", Toast.LENGTH_LONG).show();
+						return;
+					}
+				}	
+				if(event.fileLocation.endsWith(".mp3")){
+					InputStream mp3Stream = new FileInputStream(event.fileLocation);
+					Bitstream stream = new Bitstream(mp3Stream);
+					Header header = stream.readFrame();
+					if(header.frequency() != sampleRate){
+						
+						Toast.makeText(this, "The 'SampleRate' or 'Channel' is not Supported", Toast.LENGTH_LONG).show();
+						Toast.makeText(this, "SampleRate = 44100, Channel = 2", Toast.LENGTH_LONG).show();
+						return;
+					}
+					stream.closeFrame();
+					stream.close();
+				}
+					
+			}catch(IOException e){
+				e.printStackTrace();
+			} catch (BitstreamException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
-		Log.v("FileName",""+fileName);
 		dialog.dismiss();
-		Log.v("Dismissing","Dismissed event");
 		Intent intent = new Intent(this,FileBuilderService.class);
 		Messenger messenger = new Messenger(handler);
 		Bundle data = new Bundle();

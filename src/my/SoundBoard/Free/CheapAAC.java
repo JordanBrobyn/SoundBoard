@@ -1,4 +1,4 @@
-package my.SoundBoard;
+package my.SoundBoard.Free;
 /*
  * Copyright (C) 2009 Google Inc.
  *
